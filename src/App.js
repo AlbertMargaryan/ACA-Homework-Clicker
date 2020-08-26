@@ -15,7 +15,7 @@ export default class App extends React.Component {
       max: +Infinity,
       maxDis: false //dis - disabled
     };
-    
+
      this.handleIncreaseCounter = this.handleIncreaseCounter.bind(this);
      this.handleDecreaseCounter = this.handleDecreaseCounter.bind(this);
      this.handleResetCounter = this.handleResetCounter.bind(this);
@@ -85,12 +85,21 @@ export default class App extends React.Component {
     }
   }
   handleSaveState() {
-
+    let myJSON = JSON.stringify(this.state);
+    localStorage.setItem("state", myJSON);
   }
   handleRestoreState() {
-
+    if(localStorage.getItem("state")) {
+      try {
+        let obj = JSON.parse(localStorage.getItem("state"));
+        this.setState(obj)
+      }
+      catch(e) {
+        document.write(e)
+      }
+    }
   }
-  handle
+
   render(){
     return (
       <>
