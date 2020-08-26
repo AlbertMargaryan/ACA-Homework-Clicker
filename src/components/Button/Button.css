@@ -37,3 +37,7 @@ button:disabled {
 .button-container {
 	margin: 10px;
 }
+.reversed {
+	border-radius: 0 0 10px 10px;
+	background: #333;
+}

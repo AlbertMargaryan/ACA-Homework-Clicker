@@ -2,3 +2,15 @@ h1 {
 	color: #BF9CE2;
 	margin: 10px;
 }
+label {
+	padding: 10px 0;
+	color: #BF9CE2;
+}
+.Input-container {
+	margin: 20px 0;
+}
+.reversed {
+	border-radius: 0 0 10px 10px;
+	border-top: 2px solid #BF9CE2;
+	background: #333;
+}
