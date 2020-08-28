@@ -3,6 +3,7 @@ import Styles from './App.css';
 
 import Button from './components/Button/Button.js'
 import Input from './components/Input/Input.js'
+import Success from './components/Success/Success.js'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -13,7 +14,8 @@ export default class App extends React.Component {
       min: 0,
       minDis: false, //dis - disabled
       max: +Infinity,
-      maxDis: false //dis - disabled
+      maxDis: false, //dis - disabled
+      successDisplayState: 'none'
     };
 
      this.handleIncreaseCounter = this.handleIncreaseCounter.bind(this);
@@ -24,8 +26,11 @@ export default class App extends React.Component {
      this.handleMaximalChanger = this.handleMaximalChanger.bind(this);
      this.handleSaveState = this.handleSaveState.bind(this);
      this.handleRestoreState = this.handleRestoreState.bind(this);
+     this.successDisplayStateChange = this.successDisplayStateChange.bind(this)
   }
-
+  successDisplayStateChange() {
+     this.setState({successDisplayState: 'none'})
+  }
   handleIncreaseCounter() {
       this.setState(state => ({
         minDis: false
@@ -85,20 +90,31 @@ export default class App extends React.Component {
     }
   }
   handleSaveState() {
-    let myJSON = JSON.stringify(this.state);
-    localStorage.setItem("state", myJSON);
+    try {
+      let myJSON = JSON.stringify(this.state);
+      localStorage.setItem("state", myJSON);
+      this.setState({successDisplayState: 'block'})
+      setTimeout(this.successDisplayStateChange, 2000)
+
+    }
+    catch(e) {
+      document.write(e)
+    }
   }
   handleRestoreState() {
     if(localStorage.getItem("state")) {
       try {
         let obj = JSON.parse(localStorage.getItem("state"));
         this.setState(obj)
+        this.setState({successDisplayState: 'block'})
+        setTimeout(this.successDisplayStateChange, 2000)
       }
       catch(e) {
         document.write(e)
       }
     }
   }
+  
 
   render(){
     return (
@@ -120,6 +136,7 @@ export default class App extends React.Component {
           <Button class="reversed" title="Save!" onclick={this.handleSaveState}/>
           <Button class="reversed" title="Restore!" onclick={this.handleRestoreState}/>
         </div>
+        <Success message="Success!" display={this.state.successDisplayState} />
       </>
     );
   }

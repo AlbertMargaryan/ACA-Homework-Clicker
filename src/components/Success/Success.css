@@ -1,0 +1,14 @@
+.success {
+	diaplay: none;
+
+	position: absolute;
+	bottom: 10px;
+	right: 20px;
+	padding: 10px;
+
+	background-color: 	#22bb33;
+	color: #BBFF9B;
+}
+div p {
+	margin: 5px;
+}
